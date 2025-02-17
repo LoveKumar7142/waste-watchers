@@ -1,0 +1,23 @@
+
+#header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #37517e;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+  }
+.container h1 a{
+    text-decoration: none;
+}
+nav ul li a{
+    text-decoration: none;
+}
+
+
+
+
+

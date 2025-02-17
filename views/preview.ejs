@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complaints Preview</title>
+    <link rel="stylesheet" href="/admin-previwe-css-js/preview.css" />
+    <link rel="stylesheet" href="/header/header.css">
+    <link rel="stylesheet" href="/header/header_update.css">
+    <link rel="stylesheet" href="/footer_css/footer_css.css">
+    <%-include('commonHeadLinks/head_index')%>
+  </head>
+  <body class="body1">
+    <div class="div2"><%-include('headers/header_complain')%></div>
+    <h1 class="header1">Complaints Table</h1>
+
+    <div class="table-container1">
+      <table class="table1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Complaint</th>
+            <th>Address</th>
+            <th>Image</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% complaints.forEach(function(complaint) { %>
+          <tr id="complaintRow1-<%= complaint.id %>">
+            <td><%= complaint.id %></td>
+            <td><%= complaint.user_id %></td>
+            <td><%= complaint.name %></td>
+            <td><%= complaint.complaint %></td>
+            <td><%= complaint.address %></td>
+            <td>
+              <% if (complaint.image_path) { %>
+              <img
+                src="<%= complaint.image_path %>"
+                alt="Complaint Image"
+                style="max-width: 100px"
+              />
+              <% } else { %> No Image <% } %>
+            </td>
+            <td><%= complaint.latitude %></td>
+            <td><%= complaint.longitude %></td>
+            <td><%= complaint.created_at %></td>
+            <td class="actions1">
+              <button
+                class="view-btn1"
+                onclick="viewComplaint(<%= complaint.id %>)"
+              >
+                <span class="icon1">👁️</span> View
+              </button>
+              <button
+                class="delete-btn1"
+                onclick="deleteComplaints(<%= complaint.id %>)"
+              >
+                <span class="icon1">🗑️</span> Delete
+              </button>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Viewing Complaint Details -->
+    <div class="modal1" id="complaintModal1">
+      <div class="modal-content1">
+        <span class="close1" onclick="closeModal()">&times;</span>
+        <div class="card1" id="complaintCard1">
+          <h3 id="modalTitle1">Complaint Details</h3>
+          <p id="modalDescription1"></p>
+          <p id="modalAddress1"></p>
+          <p id="modalCreatedAt1"></p>
+          <img id="modalImage1" src="" alt="Complaint Image" />
+          <p id="modalLatitude1"></p>
+          <p id="modalLongitude1"></p>
+        </div>
+      </div>
+    </div>
+    <%-include('footer_links/footer')%>
+    <script>
+      // Pass complaints data from server to client-side JavaScript
+      const complaintsData = <%- JSON.stringify(complaints) %>;
+    </script>
+
+    <script src="/admin-previwe-css-js/preview.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

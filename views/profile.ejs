@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="/admin-previwe-css-js/preview.css" />
+    <link rel="stylesheet" href="/header/header.css" />
+    <link rel="stylesheet" href="/header/header_update.css" />
+    <%-include('commonHeadLinks/head_index')%>
+
+    <style>
+      /* General Body Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .div{
+        height: 60px;
+      }
+
+      /* Layout Container */
+      .layout-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 20px;
+        box-sizing: border-box;
+      }
+
+      /* Profile Section and Complaints Section */
+      .profile-section,
+      .complaints-section {
+        width: 48%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      }
+
+      /* Complaint Card Layout */
+      .complaint-card {
+        background-color: #fff;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 100%;
+        /* Prevent overflow */
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .complaint-card:hover {
+        transform: translateY(-5px);
+        /* Hover effect to raise the card */
+      }
+
+      .complaint-card img {
+        max-width: 100px;
+        border-radius: 8px;
+        margin-right: 20px;
+        /* Space between image and text */
+      }
+
+      .complaint-card .complaint-details {
+        flex-grow: 1;
+        /* Allow text to take up available space */
+      }
+
+      .complaint-card h4 {
+        margin: 0;
+        font-size: 1.2em;
+        color: #333;
+      }
+
+      .complaint-card p {
+        margin: 5px 0;
+        color: #666;
+        font-size: 1em;
+      }
+
+      .complaint-card button.delete-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      .complaint-card button.delete-btn:hover {
+        background-color: #e53935;
+        /* Darker red on hover */
+      }
+
+      /* Headings */
+      h2,
+      h3,
+      h4 {
+        color: #333;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+
+      h3 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+
+      h4 {
+        font-size: 1.2em;
+      }
+
+      /* Labels */
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      /* Responsive Design */
+      @media screen and (max-width: 768px) {
+        .layout-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .profile-section,
+        .complaints-section {
+          width: 90%;
+          margin-bottom: 20px;
+        }
+
+        h2 {
+          font-size: 1.5em;
+        }
+
+        h3 {
+          font-size: 1.3em;
+        }
+
+        h4 {
+          font-size: 1em;
+        }
+
+        button {
+          font-size: 0.9em;
+          padding: 8px 16px;
+        }
+
+        .complaint-card {
+          flex-direction: column;
+          text-align: center;
+          /* Stack the elements vertically on small screens */
+        }
+
+        .complaint-card img {
+          max-width: 80%;
+          /* Resize image on small screens */
+          margin-bottom: 10px;
+          /* Space between image and text */
+        }
+
+        .complaint-card .complaint-details {
+          text-align: left;
+        }
+      }
+
+      /* Success/Error Message */
+      .success-message,
+      .error-message {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        /* color: #fff; */
+      }
+
+      /* .success-message {
+        background-color: #4caf50;
+      }
+
+      .error-message {
+        background-color: #f44336;
+      } */
+
+      .profile-info {
+        margin-bottom: 20px;
+      }
+
+      /* Additional Styles for Flex */
+      .complaints-section ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .complaints-section li {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div"><%-include('headers/header_preview')%></div>
+
+    <div class="layout-container">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <% if (error) { %>
+        <div class="error-message"><%= error %></div>
+        <% } %> <% if (success) { %>
+        <div class="success-message"><%= success %></div>
+        <% } %>
+
+        <form action="/update-profile" method="POST">
+          <h2>Profile Information</h2>
+          <div class="profile-info">
+            <label for="full_name">Full Name:</label>
+            <input
+              type="text"
+              id="full_name"
+              name="full_name"
+              value="<%= user.full_name %>"
+              required
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="<%= user.email %>"
+              required
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="phone">Phone:</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value="<%= user.phone %>"
+              required
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value="<%= user.address %>"
+              required
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="<%= user.username %>"
+              required
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="password"
+              >Password (Leave blank to keep unchanged):</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              readonly
+              class="editable-field"
+            /><br /><br />
+
+            <button type="submit" id="saveBtn">Save Changes</button>
+            <button type="button" id="editBtn" onclick="toggleEditMode()">
+              Edit Profile
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Complaints Section -->
+      <div class="complaints-section">
+        <h3>Your Complaints</h3>
+        <% if (complaints.length> 0) { %>
+        <ul>
+          <% complaints.forEach(function (complaint) { %>
+          <li class="complaint-card" id="complaint-<%= complaint.id %>">
+            <!-- Image on the left -->
+            <% if (complaint.image_path) { %>
+            <img src="<%= complaint.image_path %>" alt="Complaint Image" />
+            <% } %>
+
+            <div class="complaint-details">
+              <!-- Complaint Title -->
+              <h4><%= complaint.name %></h4>
+              <p><%= complaint.complaint %></p>
+              <p><%= complaint.address %></p>
+              <p>Date: <%= complaint.date %></p>
+            </div>
+
+            <!-- Delete Button -->
+            <button class="delete-btn" data-complaint-id="<%= complaint.id %>">
+              Delete
+            </button>
+          </li>
+          <% }) %>
+        </ul>
+        <% } else { %>
+        <p>No complaints submitted yet.</p>
+        <% } %>
+      </div>
+    </div>
+    <%-include('footer_links/footer')%>
+
+    <script>
+      // Toggle between Edit and View mode
+      function toggleEditMode() {
+        const editableFields = document.querySelectorAll(".editable-field");
+        const editBtn = document.getElementById("editBtn");
+        const saveBtn = document.getElementById("saveBtn");
+
+        let isEditable = false;
+
+        editableFields.forEach((field) => {
+          if (field.hasAttribute("readonly")) {
+            field.removeAttribute("readonly");
+            isEditable = true;
+          } else {
+            field.setAttribute("readonly", true);
+          }
+        });
+
+        if (isEditable) {
+          saveBtn.style.display = "inline"; // Show save button
+          editBtn.style.display = "none"; // Hide edit button
+        } else {
+          saveBtn.style.display = "none"; // Hide save button
+          editBtn.style.display = "inline"; // Show edit button
+        }
+      }
+
+      // Handle delete button click
+      document.querySelectorAll(".delete-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const complaintId = this.getAttribute("data-complaint-id");
+
+          // Send AJAX request to delete the complaint from the database and UI
+          fetch("/deleteComplaint", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ complaintId }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Remove the complaint card from the UI
+                document.getElementById(`complaint-${complaintId}`).remove();
+              } else {
+                alert("Failed to delete complaint");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Error deleting complaint");
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+
+.body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+}
+.div2{
+    height: 70px;
+}
+.container1 {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 592px) {
+    .div2{
+        height: 90px;
+    }
+}
+@media (max-width: 363px) {
+    .div2{
+        height:110px;
+    }
+}
+
+.h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+.camera-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.camera-container video {
+    width: 100%;
+    border-radius: 8px;
+}
+.camera-container canvas {
+    display: none;
+}
+.form-group input,
+.form-group textarea {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+#useMap{
+    width: 2%;
+}
+.form-group input[type="file"] {
+    width: 93%;
+    padding: 0;
+}
+.form-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+.map-container {
+    margin-top: 30px;
+    position: relative;
+}
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.btns {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 48%;
+}
+.btns:hover {
+    background-color: #2980b9;
+}
+.btns:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+.footer {
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 30px;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #map {
+        height: 300px;
+    }
+}

@@ -1,0 +1,45 @@
+**Waste Watcher's Folder Structure**
+
+```
+Waste-Watchers/
+|-- node_modules/
+|   |-- all node modules
+|-- .env
+|-- public/
+|   |-- admin-complaints-css-js/
+|   |   |-- complaint.css
+|   |   |-- complaint.js
+|   |-- admin-login-css-js/
+|   |   |-- login.css
+|   |   |-- login.js
+|   |-- admin-preview-css-js/
+|   |   |-- preview.css
+|   |   |-- preview.js
+|   |-- assets/
+|   |   |-- css/
+|   |   |   |-- style.css
+|   |   |-- js/
+|   |   |   |-- script.css
+|   |   |-- img/
+|   |   |   |-- main file images
+|   |   |-- vendor/
+|   |   |   |-- all frontend external files like bootstrap ,icons etc.
+|   |-- footer/
+|   |   |-- footer.css
+|   |-- header/
+|   |   |-- header_update.css
+|   |   |-- header.css
+|   |-- uploads/
+|   |   |-- all complaints images
+|-- views/
+|   |-- index.ejs
+|   |-- login.ejs
+|   |-- profile.ejs
+|   |-- complaint.ejs
+|   |-- forgot-password.ejs
+|   |-- reset-password.ejs
+|-- app.js
+|-- package.json
+|-- package-lock.json
+```
+**Code Separation Details**

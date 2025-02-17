@@ -1,0 +1,35 @@
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="/">Waste watcher's</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/"><span class="fa fa-home"> Home </span></a></li>
+          <li><a class="nav-link scrollto" href="/"><span class="fa fa-info-circle" aria-hidden="true"> About us</span></a></li>
+      
+          <!-- Conditional Navigation based on Login and Role -->
+          <% if (isLoggedIn) { %>
+              <% if (userRole === 'client') { %>
+                  <li><a class="nav-link scrollto" href="/complain"><span class="fa fa-trash"> Complain</span></a></li>
+              <% } else if (userRole === 'officer') { %>
+                  <li><a class="nav-link scrollto" href="/preview"><span class="fa fa-edit"> Preview Complain</span></a></li>
+              <% } %>
+              <li><a class="nav-link scrollto" href="/"><span class="fa fa-question-circle"> FAQ</span></a></li>
+              <li><a class="nav-link scrollto" href="/profile"><span class="fa fa-user"> Profile</span></a></li>
+              <li><a class="nav-link scrollto" href="/logout"><span class="fas fa-sign-out-alt"> Logout</span></a></li>
+          <% } else { %>
+              <li><a class="nav-link scrollto" href="/"><span class="fa fa-question-circle"> FAQ</span></a></li>
+              <li><a class="nav-link scrollto" href="/login"><span class="fas fa-sign-in-alt"> Login</span></a></li>
+          <% } %>
+      </ul>
+      
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    
+
+    </div>
+  </header>
